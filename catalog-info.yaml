@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sample-spring-boot-app
+  description: Sample Spring Boot JSON API
+spec:
+  type: service
+  owner: service@example.com
+  lifecycle: experimental
