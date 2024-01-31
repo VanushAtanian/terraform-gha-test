@@ -17,6 +17,6 @@ jobs:
       - name: Install dependencies
         run: terraform init
       - name: Terraform Apply
-        run: terraform apply
+        run: terraform apply -auto-approve
       - name: Deploy project
         run: echo "Deploying..."
