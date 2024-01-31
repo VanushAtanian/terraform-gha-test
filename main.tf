@@ -24,7 +24,7 @@ data "aws_ami" "latest_amazon" {
 
 #------------------------------------------------------------
 resource "aws_ecr_repository" "ecr_repository" {
-  name                 = "test"
+  name                 = "gha"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
