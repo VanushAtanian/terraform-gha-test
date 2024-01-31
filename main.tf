@@ -1,4 +1,8 @@
-provider "aws" {}
+provider "aws" {
+  region     = "eu-central-1"
+  access_key = "AKIA2FRWNY5MJLC3L7GS"
+  secret_key = "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"
+}
 
 data "aws_ami" "latest_ubuntu" {
   owners      = ["099720109477"]
