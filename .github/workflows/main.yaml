@@ -1,0 +1,22 @@
+
+name: Terraform Test 1
+on:
+  push:
+    branches: 
+      - main
+    path-ignore:
+  workflow_dispatch:
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: terraform init
+      - name: Terraform Apply
+        run: terraform apply
+      - name: Deploy project
+        run: echo "Deploying..."
