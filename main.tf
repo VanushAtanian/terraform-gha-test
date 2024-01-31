@@ -1,7 +1,7 @@
 provider "aws" {
-  region     = "eu-central-1"
-  access_key = "AKIA2FRWNY5MJLC3L7GS"
-  secret_key = "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"
+  region     = eu-central-1
+  access_key = var.AWS_ACCESS_KEY_ID
+  secret_key = var.AWS_SECRET_ACCESS_KEY
 }
 
 data "aws_ami" "latest_ubuntu" {
