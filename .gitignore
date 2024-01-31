@@ -4,6 +4,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+.terraform.lock.hcl
+terraform-gha-triggering/terraform.tfstate
+terraform-gha-triggering/.terraform.tfstate.lock.info
+
 ### IntelliJ IDEA ###
 .idea/
 *.iws

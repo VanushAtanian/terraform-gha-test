@@ -22,6 +22,17 @@ data "aws_ami" "latest_amazon" {
   }
 }
 
+#------------------------------------------------------------
+resource "aws_ecr_repository" "foo" {
+  name                 = "TestFromGHA"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
+
+
 output "data_ubuntu_ami_id" {
   value = data.aws_ami.latest_ubuntu.id
 }
