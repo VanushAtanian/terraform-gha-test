@@ -29,6 +29,25 @@ resource "aws_ecs_cluster" "main_cluster" {
   name = "main-cluster"
 }
 
+resource "aws_iam_role" "ecs_task_execution_role" {
+  name = "ecs_task_execution_role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Effect = "Allow",
+      Principal = {
+        Service = "ecs-tasks.amazonaws.com"
+      },
+      Action = "sts:AssumeRole"
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_task_execution_policy_attachment" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
 
 resource "aws_ecs_task_definition" "main_task_definition" {
   family                   = "main-task-family"
@@ -36,7 +55,7 @@ resource "aws_ecs_task_definition" "main_task_definition" {
   network_mode             = "awsvpc" # Use awsvpc network mode for Fargate
   cpu                      = "256"    # Specify CPU units (minimum value)
   memory                   = "512"
-  execution_role_arn       = "arn:aws:iam::699120076632:role/aws-service-role/replication.ecr.amazonaws.com/AWSServiceRoleForECRReplication"
+  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   container_definitions = jsonencode([
     {
       "name"      = "main-container",
