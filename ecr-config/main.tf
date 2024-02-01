@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+data "aws_availability_zones" "working" {}
+
 data "aws_ami" "latest_ubuntu" {
   owners      = ["099720109477"]
   most_recent = true
@@ -35,6 +37,39 @@ data "aws_ami" "latest_amazon" {
 }
 
 #------------------------------------------------------------
+
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
+}
+
+resource "aws_subnet" "main_subnet" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = cidrsubnet(aws_vpc.main.cidr_block, 8, 1)
+  availability_zone = data.aws_availability_zones.working.names[0]
+}
+
+resource "aws_security_group" "ecs_security_group" {
+  name   = "ecs-security-group"
+  vpc_id = aws_vpc.main.id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    self        = "false"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "any"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+
 resource "aws_ecr_repository" "ecr_repository" {
   name                 = "gha"
   image_tag_mutability = "MUTABLE"
@@ -47,18 +82,4 @@ resource "aws_ecr_repository" "ecr_repository" {
 }
 
 
-output "data_ubuntu_ami_id" {
-  value = data.aws_ami.latest_ubuntu.id
-}
 
-output "data_ubuntu_ami_name" {
-  value = data.aws_ami.latest_ubuntu.name
-}
-
-output "data_amazon_linux_ami_id" {
-  value = data.aws_ami.latest_amazon.id
-}
-
-output "data_amazon_linux_ami_name" {
-  value = data.aws_ami.latest_amazon.name
-}

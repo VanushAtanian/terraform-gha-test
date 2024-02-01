@@ -62,5 +62,8 @@ jobs:
       - name: Show Docker images
         run: docker images
 
+      - name: Show pwd
+        run: pwd
+
       - name: Deploy project
         run: echo "Deploying..."
