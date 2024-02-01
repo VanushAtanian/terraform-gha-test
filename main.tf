@@ -10,7 +10,7 @@ terraform {
   backend "s3" {
     bucket = "van-presentation-terraform-state"
     key    = "dev/presentation/terraform.tfstate"
-    region = var.REGION
+    region = "eu-central-1"
   }
 }
 
