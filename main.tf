@@ -8,10 +8,11 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket  = "van-presentation-terraform-state"
-    key     = "dev/presentation/terraform.tfstate"
-    region  = "eu-central-1"
-    profile = "dev"
+    bucket     = "van-presentation-terraform-state"
+    key        = "dev/presentation/terraform.tfstate"
+    region     = "eu-central-1"
+    access_key = "AKIA2FRWNY5MJLC3L7GS"
+    secret_key = "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"
   }
 }
 
