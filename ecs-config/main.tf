@@ -9,7 +9,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "van-presentation-terraform-state"
-    key    = "dev/presentation/terraform.tfstate"
+    key    = "cluster/presentation/terraform.tfstate"
     region = "eu-central-1"
     # access_key = "AKIA2FRWNY5MJLC3L7GS"
     # secret_key = "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"
@@ -20,7 +20,7 @@ data "terraform_remote_state" "ecr" {
   backend = "s3"
   config = {
     bucket = "van-presentation-terraform-state"
-    key    = "dev/presentation/terraform.tfstate"
+    key    = "preq/presentation/terraform.tfstate"
     region = "eu-central-1" // Region where bycket created
   }
 }
