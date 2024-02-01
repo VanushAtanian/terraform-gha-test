@@ -1,7 +1,17 @@
 provider "aws" {
-  region     = "eu-central-1"
+  region     = var.REGION
   access_key = var.AWS_ACCESS_KEY_ID
   secret_key = var.AWS_SECRET_ACCESS_KEY
+}
+
+#------------------------------------------------------------
+
+terraform {
+  backend "s3" {
+    bucket = "van-presentation-terraform-state"
+    key    = "dev/presentation/terraform.tfstate"
+    region = var.REGION
+  }
 }
 
 data "aws_ami" "latest_ubuntu" {
