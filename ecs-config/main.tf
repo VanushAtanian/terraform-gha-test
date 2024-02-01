@@ -32,6 +32,8 @@ resource "aws_ecs_cluster" "main_cluster" {
 
 resource "aws_ecs_task_definition" "main_task_definition" {
   family = "main-task-family"
+  requires_compatibilities = [ "FARGATE" ]
+  network_mode             = "awsvpc"     # Use awsvpc network mode for Fargate
   container_definitions = jsonencode([
     {
       "name"      = "main-container",
@@ -39,6 +41,7 @@ resource "aws_ecs_task_definition" "main_task_definition" {
       "cpu"       = 256,
       "memory"    = 512,
       "essential" = true,
+      "requies"
       "portMappings" = [
         {
           "containerPort" = 80,
@@ -55,7 +58,7 @@ resource "aws_ecs_service" "main_service" {
   cluster         = aws_ecs_cluster.main_cluster.id
   task_definition = aws_ecs_task_definition.main_task_definition.arn
   desired_count   = 1
-  launch_type     = "FARGATE"
+  launch_type     = ["FARGATE"]
   network_configuration {
     subnets          = [data.terraform_remote_state.ecr.outputs.subnet_id]
     security_groups  = [data.terraform_remote_state.ecr.outputs.security_group_id]
