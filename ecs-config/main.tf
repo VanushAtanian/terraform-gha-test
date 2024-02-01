@@ -65,8 +65,8 @@ resource "aws_ecs_task_definition" "main_task_definition" {
       "essential" = true,
       "portMappings" = [
         {
-          "containerPort" = 80,
-          "hostPort"      = 80,
+          "containerPort" = 8080,
+          "hostPort"      = 8080,
           "protocol"      = "tcp"
         }
       ]
