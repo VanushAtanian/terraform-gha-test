@@ -37,7 +37,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::699120076632:user/terraform
+          role-to-assume: arn:aws:iam::699120076632:role/aws-service-role/replication.ecr.amazonaws.com/AWSServiceRoleForECRReplication
           aws-region: eu-central-1
 
       - name: Login To AWS ECR
