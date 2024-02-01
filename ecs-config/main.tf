@@ -57,8 +57,8 @@ resource "aws_ecs_service" "main_service" {
   desired_count   = 1
   launch_type     = "FARGATE"
   network_configuration {
-    subnets          = data.terraform_remote_state.ecr.outputs.subnet_id
-    security_groups  = data.terraform_remote_state.ecr.outputs.security_group_id
+    subnets          = [data.terraform_remote_state.ecr.outputs.subnet_id]
+    security_groups  = [data.terraform_remote_state.ecr.outputs.security_group_id]
     assign_public_ip = true
   }
 }
