@@ -8,9 +8,10 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "van-presentation-terraform-state"
-    key    = "dev/presentation/terraform.tfstate"
-    region = "eu-central-1"
+    bucket  = "van-presentation-terraform-state"
+    key     = "dev/presentation/terraform.tfstate"
+    region  = "eu-central-1"
+    profile = "dev"
   }
 }
 
