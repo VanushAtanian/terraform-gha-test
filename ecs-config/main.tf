@@ -34,6 +34,8 @@ resource "aws_ecs_task_definition" "main_task_definition" {
   family                   = "main-task-family"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc" # Use awsvpc network mode for Fargate
+  cpu                      = "256"    # Specify CPU units (minimum value)
+  memory                   = "512"
   container_definitions = jsonencode([
     {
       "name"      = "main-container",
