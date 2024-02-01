@@ -57,7 +57,7 @@ resource "aws_ecs_service" "main_service" {
   cluster         = aws_ecs_cluster.main_cluster.id
   task_definition = aws_ecs_task_definition.main_task_definition.arn
   desired_count   = 1
-  launch_type     = ["FARGATE"]
+  launch_type     = "FARGATE"
   network_configuration {
     subnets          = [data.terraform_remote_state.ecr.outputs.subnet_id]
     security_groups  = [data.terraform_remote_state.ecr.outputs.security_group_id]
