@@ -31,9 +31,9 @@ resource "aws_ecs_cluster" "main_cluster" {
 
 
 resource "aws_ecs_task_definition" "main_task_definition" {
-  family = "main-task-family"
-  requires_compatibilities = [ "FARGATE" ]
-  network_mode             = "awsvpc"     # Use awsvpc network mode for Fargate
+  family                   = "main-task-family"
+  requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc" # Use awsvpc network mode for Fargate
   container_definitions = jsonencode([
     {
       "name"      = "main-container",
@@ -41,7 +41,6 @@ resource "aws_ecs_task_definition" "main_task_definition" {
       "cpu"       = 256,
       "memory"    = 512,
       "essential" = true,
-      "requies"
       "portMappings" = [
         {
           "containerPort" = 80,
