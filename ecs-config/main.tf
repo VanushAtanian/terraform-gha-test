@@ -36,6 +36,7 @@ resource "aws_ecs_task_definition" "main_task_definition" {
   network_mode             = "awsvpc" # Use awsvpc network mode for Fargate
   cpu                      = "256"    # Specify CPU units (minimum value)
   memory                   = "512"
+  execution_role_arn       = "arn:aws:iam::aws:policy/aws-service-role/ECRReplicationServiceRolePolicy"
   container_definitions = jsonencode([
     {
       "name"      = "main-container",
